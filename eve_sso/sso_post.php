@@ -79,14 +79,14 @@ if ($_GET['state'] != $_SESSION['state_val'])
 $http_headers = array();
 $http_headers['Authorization'] = 'Basic ' . base64_encode(config::get('eve_sso_client_id') . ':' . config::get('eve_sso_secret'));
 $http_headers['User-Agent'] = 'EDK Killboard SSO Comments 1.0';
-$results = query('https://sisilogin.testeveonline.com/oauth/token', 'POST', array('grant_type' => 'authorization_code', 'code' => $_GET['code']), $http_headers);
+$results = query('https://login.eveonline.com/oauth/token', 'POST', array('grant_type' => 'authorization_code', 'code' => $_GET['code']), $http_headers);
 
 if ($results['result']['error'])
 {
   showError($results['result']['error_description'], "while getting token");
 }
 
-$char_info = query('https://sisilogin.testeveonline.com/oauth/verify', 'GET', null, array('Authorization' => 'Bearer ' . $results['result']['access_token'], 'User-Agent' => 'EDK Killboard SSO Comments 1.0'));
+$char_info = query('https://login.eveonline.com/oauth/verify', 'GET', null, array('Authorization' => 'Bearer ' . $results['result']['access_token'], 'User-Agent' => 'EDK Killboard SSO Comments 1.0'));
 if ($char_info['result']['error'])
 {
   showError($char_info['result']['error_description'], "while verifying token");
