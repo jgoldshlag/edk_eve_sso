@@ -24,7 +24,7 @@ class EVE_SSO
     if(isset($_POST['eve_sso']))
     {
       $_SESSION['state_val'] = rand();
-      $_SESSION['sso_kill_id'] = $_GET['kll_id'];
+      $_SESSION['sso_kill_id'] = edkURI::getArg('kll_id', 1);
       $_SESSION['sso_comment'] = $_POST['comment'];
       $_SESSION['sso_redir_url'] = $_SERVER['REQUEST_URI'];
       $sso_url = "https://login.eveonline.com/oauth/authorize/?response_type=code&redirect_uri=".urlencode(edkURI::page('sso_post'))."&client_id=".config::get('eve_sso_client_id')."&scope=&state=".$_SESSION['state_val'];
