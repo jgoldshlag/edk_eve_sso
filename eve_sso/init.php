@@ -23,6 +23,11 @@ class EVE_SSO
     
     if(isset($_POST['eve_sso']))
     {
+	  if(trim($_POST['comment']) == '')
+	  {
+	    $object->commenthtml = 'Error: The silent type, hey? Good for you, bad for a comment.';
+		return;
+	  }
       $_SESSION['state_val'] = rand();
       $_SESSION['sso_kill_id'] = edkURI::getArg('kll_id', 1);
       $_SESSION['sso_comment'] = $_POST['comment'];
